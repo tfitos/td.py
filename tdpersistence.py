@@ -1,0 +1,3 @@
+
+def persist(tdlist):
+    pass
