@@ -15,12 +15,12 @@ def main():
         tdlist = parse(sys.argv[1])
         show(tdlist)
         # print tdlist_todict(tdlist)
-        answer = raw_input ("Do you want to store the this TD list (yes/no)? ")
+        answer = raw_input ("Do you want to store this TD list (yes/no)? ")
         if answer == "yes":
             persist(tdlist)
             print "TD list stored."
         else:
-            print "td.py exists"
+            print "td.py exits"
             sys.exit(0)
         
         
