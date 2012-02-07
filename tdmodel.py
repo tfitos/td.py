@@ -11,6 +11,7 @@ class TD:
     def __str__(self):
         return "TD[" + self.status + ";" + str(self.number)  +";" + self.text[:20]+"]"
     
+    
 class TDList:
     def __init__(self, date):
         self.date = date
@@ -23,6 +24,16 @@ MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAJ', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 
 
 
 #### MODEL HELPER METHODS ####
+
+def td_todict(td):
+    return {"status": td.status, "number": td.number, "text": td.text}
+
+def tdlist_todict(tdlist):
+    result =  {"date": str(tdlist.date.year) + "-" + MONTHS[tdlist.date.month - 1] + "-" + str(tdlist.date.day).zfill(2), 
+               "tds": []}
+    for td in tdlist.tds:
+        result["tds"].append(td_todict(td))
+    return result
 
 def show(tdlist):
     print "==== " + str(tdlist.date) + " ===="
