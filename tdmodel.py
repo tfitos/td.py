@@ -19,26 +19,34 @@ class TDList:
     def __str__(self):
         return "TDList[" + self.date +"]"
 
-MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAJ', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
 
 
 
 #### MODEL HELPER METHODS ####
 
+def tdlist_date2string(d):
+    return str(d.year) + "-" + MONTHS[d.month - 1] + "-" + str(d.day).zfill(2)
+
 def td_todict(td):
     return {"status": td.status, "number": td.number, "text": td.text}
 
 def tdlist_todict(tdlist):
-    result =  {"date": str(tdlist.date.year) + "-" + MONTHS[tdlist.date.month - 1] + "-" + str(tdlist.date.day).zfill(2), 
+    result =  {"date": tdlist_date2string(tdlist.date),
                "tds": []}
     for td in tdlist.tds:
         result["tds"].append(td_todict(td))
     return result
 
 def show(tdlist):
-    print "==== " + str(tdlist.date) + " ===="
+    print "  ===== " + tdlist_date2string(tdlist.date) + " ====="
     for td in tdlist.tds:
-        print td.status + " " + str(td.number) + ", " + td.text
+        print "  " + td.status + " " + str(td.number) + ", " + td.text
+
+def showdict(tdlist):
+    print "  ===== " + tdlist["date"] + " ====="
+    for td in tdlist["tds"]:
+        print "  " + td["status"] + " " + str(td["number"]) + ", " + td["text"]
 
 
 #### EXCEPTIONS #####

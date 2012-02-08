@@ -1,18 +1,21 @@
-import re, os, datetime
+import re, os, datetime, codecs
 from tdmodel import *
+
 
 def parse(path):
     """
-    opens the file and parses it to TDList
+    opens the file and parses it to a TDList
     can raise DuplicateNumberError, MissingNumberError, IncorrectFileName, IOError
     """
-    f = open(path, 'r+')
+    f = codecs.open(path, encoding='"ISO-8859-1"')
+    #f = open(path, 'r+')
     date = parsefilename(path)
     tdlist = TDList(date)
     lines = f.readlines()
     tds = {}
     maxnum = 0
     for line in lines:
+        # td = process(line.encode('utf-8').strip())
         td = process(line.strip())
         if td is not None:
             try:
@@ -61,7 +64,7 @@ def process(line):
     """
     processes one td line and makes TD object; example: 'DONE 2, finish the first version of todo app'
     """
-    p = re.compile('^\s*(PIPA|DONE|SKIP|TODO)?\s*(\d+),\s+([a-zA-Z0-9_ ]+)$')
+    p = re.compile('^\s*(PIPA|DONE|SKIP|TODO)?\s*(\d+),\s+(.+)$')
     m = p.match(line)
     if m:
         td = TD(m.group(1), int(m.group(2)), m.group(3))

@@ -1,7 +1,7 @@
 import sys
 from tdmodel import *
 from tdfileparser import parse
-from tdpersistence import persist
+from tdpersistence import MongoPersistence
 
 
 def main():
@@ -13,15 +13,28 @@ def main():
         sys.exit(1)
     try:
         tdlist = parse(sys.argv[1])
+        print 'Parsed TD list:'
         show(tdlist)
-        # print tdlist_todict(tdlist)
-        answer = raw_input ("Do you want to store this TD list (yes/no)? ")
-        if answer == "yes":
-            persist(tdlist)
-            print "TD list stored."
+        print ''
+        persistence = MongoPersistence()
+        resultdict = persistence.search(tdlist_date2string(tdlist.date))
+        if resultdict:
+            print 'There is an existing TD list to this date:'
+            showdict(resultdict)
+            print ''
+            answer = raw_input ("Do you want to store this TD list even if there is an existing TD list (y/n)?")
+            if answer == "y":
+                persistence.remove(tdlist_date2string(tdlist.date))
+                print 'Old TD list removed.'
+        else:
+            answer = raw_input ("Do you want to store this TD list (y/n)?")
+        if answer == "y":
+            persistence.persist(tdlist)
+            print "New TD list stored (" + tdlist_date2string(tdlist.date) + ")"
         else:
             print "td.py exits"
             sys.exit(0)
+        
         
         
     except DuplicateNumberError as dne:
