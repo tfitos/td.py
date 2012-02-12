@@ -33,6 +33,7 @@ def td_todict(td):
 
 def tdlist_todict(tdlist):
     result =  {"date": tdlist_date2string(tdlist.date),
+               "realdate": tdlist.date,
                "tds": []}
     for td in tdlist.tds:
         result["tds"].append(td_todict(td))

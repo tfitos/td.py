@@ -55,7 +55,7 @@ def parsefilename(path):
     p = re.compile('^(\d\d\d\d)-(\w\w\w)-(\d\d)$')
     m = p.match(base)
     if m:
-        return datetime.date(int(m.group(1)), MONTHS.index(m.group(2)) + 1, int(m.group(3)))
+        return datetime.datetime(int(m.group(1)), MONTHS.index(m.group(2)) + 1, int(m.group(3)))
     else:
         raise IncorrectFileName(basename)
 
