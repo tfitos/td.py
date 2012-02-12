@@ -6,7 +6,7 @@ Goal
 
 This python tool parses todolist text files and puts them to a mongodb collection. To show these documents on a website the [tdgui.js] can be used.
 
-I used create my todo lists to simple textfiles. The **name** of them is **&lt;year&gt;-&lt;month&gt;-&lt;day&gt;.txt** (e.g. **2012-FEB-10.txt**); here is an example of their **content format**:
+I used to create my todo lists to simple text files. The **name** format of them is **&lt;year&gt;-&lt;month&gt;-&lt;day&gt;.txt** (e.g. **2012-FEB-10.txt**); here is an example of their **content format**:
 
 >DONE 1, add express.js to tdgui.js  
 DONE 2, select the proper template language  
