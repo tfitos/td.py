@@ -17,6 +17,7 @@ def main():
         show(tdlist)
         print ''
         persistence = MongoPersistence()
+        persistence.setup()
         resultdict = persistence.search(tdlist_date2string(tdlist.date))
         if resultdict:
             print 'There is an existing TD list to this date:'
