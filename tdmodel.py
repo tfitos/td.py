@@ -42,12 +42,12 @@ def tdlist_todict(tdlist):
 def show(tdlist):
     print "  ===== " + tdlist_date2string(tdlist.date) + " ====="
     for td in tdlist.tds:
-        print "  " + td.status + " " + str(td.number) + ", " + td.text
+        print "  " + td.status + " " + str(td.number) + ", " + repr(td.text)
 
 def showdict(tdlist):
     print "  ===== " + tdlist["date"] + " ====="
     for td in tdlist["tds"]:
-        print "  " + td["status"] + " " + str(td["number"]) + ", " + td["text"]
+        print "  " + td["status"] + " " + str(td["number"]) + ", " + repr(td["text"])
 
 
 #### EXCEPTIONS #####

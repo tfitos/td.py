@@ -27,7 +27,7 @@ def parse(path):
                 if td.number > maxnum:
                     maxnum = td.number
         else:
-            print "Skipped: " + line.strip()
+            print "Skipped: " + repr(line.strip())
     
     # validate if there is a missing number in the todolist
     for i in range(1,maxnum+1):
